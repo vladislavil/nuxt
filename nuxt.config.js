@@ -18,11 +18,12 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: 'green' },
   /*
   ** Global CSS
   */
   css: [
+    "@/node_modules/bootstrap/dist/css/bootstrap.min.css"
   ],
   /*
   ** Plugins to load before mounting the App
@@ -38,7 +39,13 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    "@nuxtjs/axios"
   ],
+
+  axios: {
+
+  },
+  
   /*
   ** Build configuration
   */

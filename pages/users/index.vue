@@ -1,11 +1,12 @@
 <template>
    <section>
-      <h1>This is users page</h1>
+      <h1>{{ pageTitle }}</h1>
       <ul>
-         <li v-for="(user, index) of users" :key="index"> 
+         <li v-for="(user, index) of users" :key="user.id"> 
             {{index + 1}}.
-            <a href="#" @click.prevent="goUser(index + 1)">
-               {{ user }} 
+            <a href="#" @click.prevent="getUser(user)">
+               {{ user.name }}
+               {{ user.email }} 
             </a>
          </li>
       </ul>
@@ -14,17 +15,26 @@
 
 <script>
    export default {
-      data: () => ({
-         users: [
-            "ivan",
-            "inna",
-            "oleg",
-            "egor"
-         ]
-      }),
+
+      asyncData({$axios, error}) {
+         return $axios.$get('https://jsonplaceholder.typicode.com/users')
+         .then(users => {
+            return {
+               users
+            }
+         })
+         .catch(err => {
+            error(err);
+         })
+      },
+      data() {
+         return {
+            pageTitle: "This is users page"
+         }
+      },
       methods: {
-         goUser(index) {
-            this.$router.push(/users/ + index)
+         getUser(user) {
+            this.$router.push('/users/' + user.id)
          }
       }   
    }

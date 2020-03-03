@@ -9,7 +9,7 @@
                   <nuxt-link exact active-class="custom-active" class="nav-link" to="/">Home</nuxt-link>
                </li>
                <li class="nav-item">
-                  <nuxt-link no-prefetch active-class="custom-active" class="nav-link" to="/users">Users</nuxt-link> <!-- no-prefetch  - для того, чтобы подгружать страницу с сервера -->
+                  <nuxt-link active-class="custom-active" class="nav-link" to="/users">Users</nuxt-link> <!-- no-prefetch  - для того, чтобы подгружать страницу с сервера -->
                </li>
                <li class="nav-item">
                   <nuxt-link active-class="custom-active" class="nav-link" to="/about">About</nuxt-link>

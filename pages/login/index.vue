@@ -11,7 +11,7 @@
       </div>
 
       <button class="btn btn-success" type="submit">Login</button>
-      <nuxt-link class="login__link" to="/">Go to the Home</nuxt-link>
+      <nuxt-link class="login__link" to="/">Home</nuxt-link>
    </form>
 </template>
 

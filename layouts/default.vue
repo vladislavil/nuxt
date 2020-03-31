@@ -1,69 +1,20 @@
 <template>
-  <div>
-    <navbar />
-    <main>
-      <div class="container">
-        <transition mode="out-in" name="fade">
-          <nuxt />
-        </transition>
-      </div>
-    </main>
-  </div>
+  <el-container>
+    <el-header>
+      <app-navigation></app-navigation>
+    </el-header>
+    <el-main>
+      <nuxt />
+    </el-main>
+  <el-footer>Footer</el-footer>
+  </el-container>
 </template>
 
 <script>
-
-import navbar from "../components/navbar";
-
-export default {
-  components: {navbar}
-}
+  import AppNavigation from "@/components/main/Navigation"
+  export default {
+    components: {
+      AppNavigation
+    }
+  }
 </script>
-
-<style>
-  .fade-enter-active {
-    animation: rubberBand 0.5s;
-  }
-
-  @keyframes rubberBand {
-  from {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-
-  30% {
-    -webkit-transform: scale3d(1.25, 0.75, 1);
-    transform: scale3d(1.25, 0.75, 1);
-  }
-
-  40% {
-    -webkit-transform: scale3d(0.75, 1.25, 1);
-    transform: scale3d(0.75, 1.25, 1);
-  }
-
-  50% {
-    -webkit-transform: scale3d(1.15, 0.85, 1);
-    transform: scale3d(1.15, 0.85, 1);
-  }
-
-  65% {
-    -webkit-transform: scale3d(0.95, 1.05, 1);
-    transform: scale3d(0.95, 1.05, 1);
-  }
-
-  75% {
-    -webkit-transform: scale3d(1.05, 0.95, 1);
-    transform: scale3d(1.05, 0.95, 1);
-  }
-
-  to {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-.rubberBand {
-  -webkit-animation-name: rubberBand;
-  animation-name: rubberBand;
-}
-</style>

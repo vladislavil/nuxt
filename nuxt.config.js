@@ -1,5 +1,5 @@
 
-export default {
+module.exports = {
   mode: 'universal',
   /*
   ** Headers of the page
@@ -18,17 +18,19 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#6cf542' },
+  loading: { color: '#3b3' },
   /*
   ** Global CSS
   */
   css: [
-    "@/node_modules/bootstrap/dist/css/bootstrap.min.css"
+    '@/theme/index.sass',
+    'element-ui/lib/theme-chalk/index.css'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/globals'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -39,17 +41,12 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    "@nuxtjs/axios"
   ],
-
-  axios: {
-
-  },
-  
   /*
   ** Build configuration
   */
   build: {
+    transpile: [/^element-ui/],
     /*
     ** You can extend webpack config here
     */

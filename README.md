@@ -1,6 +1,6 @@
-# nuxt
+# nuxt-blog
 
-> My epic Nuxt.js project
+> My awesome nuxt
 
 ## Build Setup
 

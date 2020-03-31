@@ -14,30 +14,41 @@
 </template>
 
 <script>
-   export default {
+export default {
 
-      asyncData({$axios, error}) {
-         return $axios.$get('https://jsonplaceholder.typicode.com/users')
-         .then(users => {
-            return {
-               users
-            }
-         })
-         .catch(err => {
-            error(err);
-         })
-      },
-      data() {
-         return {
-            pageTitle: "This is users page"
+   // async asyncData({store, error}) {
+   //    try {
+   //       let users = await store.dispatch('users/fetchUsers');
+   //       return {users};
+   //    }catch(e) {
+   //       error(e);
+   //    }
+   // },
+   async fetch({store}, error) {
+      try {
+         if(store.getters['users/users'].length === 0) {
+            await store.dispatch('users/fetchUsers');
          }
-      },
-      methods: {
-         getUser(user) {
-            this.$router.push('/users/' + user.id)
-         }
-      }   
-   }
+      }catch(e) {
+         error(e);
+      }
+   },
+   data() {
+      return {
+         pageTitle: "This is users page"
+      }
+   },
+   computed: {
+      users() {
+         return this.$store.getters['users/users'];
+      }
+   },
+   methods: {
+      getUser(user) {
+         this.$router.push('/users/' + user.id)
+      }
+   }   
+}
 </script>
 
 <style>

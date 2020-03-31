@@ -14,9 +14,9 @@ export default {
          error(e);
       }
    },
-   async asyncData({params, error, $axios}) {
+   async asyncData({params, error, store}) {
       try {
-         const user = await $axios.$get(`https://jsonplaceholder.typicode.com/users/${params.id}`);
+         let user = await store.dispatch('users/fetchUserById', params.id);
          return {user};
       }catch(e) {
          error(e);

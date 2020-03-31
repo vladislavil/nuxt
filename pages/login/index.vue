@@ -1,5 +1,5 @@
 <template>
-   <form>
+   <form @submit.prevent="onSubmit" v-if="!isAuth">
       <h1>Login</h1>
 
       <div class="form-group">
@@ -17,7 +17,13 @@
 
 <script>
    export default {
-      layout: "login"
+      layout: "login",
+      methods: {
+         onSubmit() {
+            this.$store.dispatch('login/login');
+            this.$router.push('/');
+         }
+      }
    }
 </script>
 

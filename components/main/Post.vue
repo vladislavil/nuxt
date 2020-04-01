@@ -14,13 +14,15 @@
       </small>    
     </header>
     <div class="post-body">
-      <img src="https://media.radissonhotels.net/image/Destination-Pages/Localattraction/16256-118729-f63244989_3XL.jpg?impolicy=HomeHero" 
-        alt="https://media.radissonhotels.net/image/Destination-Pages/Localattraction/16256-118729-f63244989_3XL.jpg?impolicy=HomeHero" 
-        class="post-img"
-      >
+      <div class="post-wrapper">
+        <img src="https://holidaygid.ru/wp-content/uploads/2016/03/berlin3.jpg" 
+          alt="https://holidaygid.ru/wp-content/uploads/2016/03/berlin3.jpg" 
+          class="post-img"
+        >
+      </div>
     </div> 
     <footer class="post-footer">
-      <el-button round>Открыть</el-button>
+      <el-button round @click="openPost">Открыть</el-button>
       <span>
         <i class="el-icon-s-comment"></i>
         12
@@ -31,7 +33,12 @@
 
 <script>
   export default {
-    
+    methods: {
+      openPost() {
+        const id = "test";
+        this.$router.push(`/post/${id}`)
+      }
+    }
   }
 </script>
 
@@ -42,9 +49,14 @@
     &:last-child
       margin: 0
 
-  .post-body 
+  .post-footer
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 1rem 20px
 
   .post-header 
     display: flex
     justify-content: space-between
+    align-items: center
 </style>

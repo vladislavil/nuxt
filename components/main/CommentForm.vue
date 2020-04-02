@@ -1,37 +1,37 @@
 <template>
-  <el-form 
-    :model="controls" 
-    :rules="rules" 
-    ref="form" 
+  <el-form
+    :model="controls"
+    :rules="rules"
+    ref="form"
     class="form"
     @submit.native.prevent="onSubmit($event)"
   >
     <h2 class="from-title">Добавить комментарий</h2>
-    <el-form-item 
-      label="Ваше имя" 
+    <el-form-item
+      label="Ваше имя"
       prop="name"
     >
-      <el-input 
+      <el-input
         v-model.trim="controls.name"
       >
       </el-input>
     </el-form-item>
-    <el-form-item 
-      label="Текст комментария" 
+    <el-form-item
+      label="Текст комментария"
       prop="text">
-      <el-input 
-        type="textarea" 
-        rows="2" resize="none" 
+      <el-input
+        type="textarea"
+        rows="2" resize="none"
         v-model="controls.text"
       >
       </el-input>
     </el-form-item>
     <el-form-item>
-      <el-button 
+      <el-button
         type="primary"
         native-type="submit"
         round
-        :loading="loading" 
+        :loading="loading"
       >
         Добавить комментарий
       </el-button>
@@ -63,7 +63,6 @@
         this.$refs.form.validate((valid) => {
           if (valid) {
 
-
             this.loading = true;
             console.log(e)
             const formData = {
@@ -71,15 +70,17 @@
               text: this.controls.text,
               postId: ''
             }
-            
+
             try {
-              this.$message.success('Комментарий успешно добавлен');
-              this.$emit('created');
-              
+              setTimeout(()=> {
+                this.$message.success('Комментарий успешно добавлен');
+                this.$emit('created');
+              }, 2000);
+
             } catch(e) {
               this.loading = false;
             }
-            
+
           }
         });
       }

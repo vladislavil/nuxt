@@ -18,8 +18,7 @@
   export default {
     components: {
       AppAside
-    },
-    middleware: 'admin-auth'
+    }
   }
 
 </script>

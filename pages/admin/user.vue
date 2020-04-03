@@ -45,6 +45,7 @@
 
   export default {
     layout: "admin",
+    middleware: 'admin-auth',
     data() {
       return {
         loading: false,

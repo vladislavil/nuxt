@@ -6,6 +6,7 @@
 
   export default {
     layout: "admin",
+    middleware: 'admin-auth',
     mounted() {
       this.$store.dispatch('auth/logout');
       this.$router.push('/admin/login?message=logout')

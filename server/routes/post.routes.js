@@ -1,0 +1,51 @@
+const passport = require('passport')
+const {Router} = require('express')
+const upload = require('../middleware/upload')
+const ctr = require('../controllers/post.controller')
+const router = Router()
+
+
+// Admin
+// /api/post/admin
+
+router.post(
+  '/admin/',
+  passport.authenticate('jwt', {session: false}),
+  upload.single('image'),
+  ctr.createPost
+
+)
+
+router.get(
+  '/admin/',
+  passport.authenticate('jwt', {session: false}),
+  ctr.getAll
+)
+
+router.get(
+  '/admin/:id',
+  passport.authenticate('jwt', {session: false}),
+  ctr.getBiId
+)
+
+router.put(
+  '/admin/:id',
+  passport.authenticate('jwt', {session: false}),
+  ctr.addView
+)
+
+router.delete(
+  '/admin/:id',
+  passport.authenticate('jwt', {session: false}),
+  ctr.removePost
+)
+
+// Base
+// /api/post/
+
+router.get('/', ctr.getAll)
+router.get('/:id', ctr.getBiId)
+router.put('/:id', ctr.addView)
+
+
+module.exports = router

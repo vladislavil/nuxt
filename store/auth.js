@@ -1,5 +1,3 @@
-import axios from "axios"
-
 export const state = () => ({
   token: null
 });
@@ -7,6 +5,9 @@ export const state = () => ({
 export const getters = {
   isAuth(state) {
     return !!state.token;
+  },
+  token(state) {
+    return state.token;
   }
 }
 
@@ -22,7 +23,7 @@ export const mutations = {
 export const actions = {
   async login({commit, dispatch}, formData) {
     try {
-      const {token} = await this.axios.post('/api/auth/admin/login', formData)
+      const {token} = await this.$axios.$post('/api/auth/admin/login', formData)
       console.log(token)
       dispatch('setToken', token);
     }catch(e) {
@@ -32,15 +33,18 @@ export const actions = {
   },
   async createUser({commit}, formData) {
     try {
-      console.log("Create user")
+      this.$axios.$post('/api/auth/admin/create', formData)
     }catch(e) {
-
+      commit('setError', e, {root: true});
+      throw e;
     }
   },
   setToken({commit}, token) {
+    this.$axios.setToken(token, 'Bearer');
     commit('setToken', token);
   },
   logOut({commit}) {
+    this.$axios.setToken(false);
     commit('logOut');
   }
 }

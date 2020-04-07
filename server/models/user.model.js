@@ -1,6 +1,5 @@
 const {model, Schema} = require('mongoose')
 
-
 const userSchema = new Schema({
   login: {
     type: String,
@@ -9,8 +8,8 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    minLength: 6,
-    required: true
+    required: true,
+    minLength: 6
   }
 })
 

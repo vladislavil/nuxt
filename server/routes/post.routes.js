@@ -4,16 +4,13 @@ const upload = require('../middleware/upload')
 const ctr = require('../controllers/post.controller')
 const router = Router()
 
-
 // Admin
 // /api/post/admin
-
 router.post(
   '/admin/',
   passport.authenticate('jwt', {session: false}),
   upload.single('image'),
   ctr.createPost
-
 )
 
 router.get(
@@ -25,13 +22,13 @@ router.get(
 router.get(
   '/admin/:id',
   passport.authenticate('jwt', {session: false}),
-  ctr.getBiId
+  ctr.getById
 )
 
 router.put(
   '/admin/:id',
   passport.authenticate('jwt', {session: false}),
-  ctr.addView
+  ctr.updatePost
 )
 
 router.delete(
@@ -41,11 +38,9 @@ router.delete(
 )
 
 // Base
-// /api/post/
-
+// /api/post
 router.get('/', ctr.getAll)
-router.get('/:id', ctr.getBiId)
+router.get('/:id', ctr.getById)
 router.put('/:id', ctr.addView)
-
 
 module.exports = router

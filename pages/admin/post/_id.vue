@@ -57,7 +57,7 @@
       return {
         loading: false,
         controls: {
-          text: 'fsdfsdf'
+          text: ''
         },
         rules: {
           text: [
@@ -65,6 +65,9 @@
           ]
         }
       }
+    },
+    mounted() {
+      this.controls.text = this.post.text
     },
     methods: {
       onSubmit() {

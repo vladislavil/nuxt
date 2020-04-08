@@ -18,17 +18,17 @@
     <el-table-column
       label="Просмотры"
       width="180">
-      <template slot-scope="{row: {view}}">
+      <template slot-scope="{row: {views}}">
         <i class="el-icon-view"></i>
-        <span style="margin-left: 10px">{{ view }}</span>
+        <span style="margin-left: 10px">{{ views }}</span>
       </template>
     </el-table-column>
     <el-table-column
       label="Комментарии"
       width="180">
-      <template slot-scope="{row: {comment}}">
+      <template slot-scope="{row: {comments}}">
         <i class="el-icon-chat-dot-square"></i>
-        <span style="margin-left: 10px">{{ comment.length }}</span>
+        <span style="margin-left: 10px">{{ comments.length }}</span>
       </template>
     </el-table-column>
     <el-table-column label="Действия">

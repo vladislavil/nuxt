@@ -8,7 +8,7 @@
     layout: "admin",
     middleware: 'admin-auth',
     mounted() {
-      this.$store.dispatch('auth/logout');
+      this.$store.dispatch('auth/logOut');
       this.$router.push('/admin/login?message=logout')
     }
   }

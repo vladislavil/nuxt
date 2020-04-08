@@ -76,7 +76,7 @@
           break;
 
         case 'logout':
-          this.$message.success("Вы успешно вышли из системы");
+          this.$message.success("Вы вышли из системы");
           break;
 
         case 'session':

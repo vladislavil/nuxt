@@ -1,5 +1,5 @@
 <template>
-  <div class="mb2">
+  <div class="mb2" style="height: 50vh">
     <canvas ref="canvas"></canvas>
   </div>
 </template>

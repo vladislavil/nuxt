@@ -25,6 +25,12 @@ router.get(
   ctr.getById
 )
 
+router.get(
+  '/admin/get/analytics',
+  passport.authenticate('jwt', {session: false}),
+  ctr.getAnalytics
+)
+
 router.put(
   '/admin/:id',
   passport.authenticate('jwt', {session: false}),
@@ -41,6 +47,6 @@ router.delete(
 // /api/post
 router.get('/', ctr.getAll)
 router.get('/:id', ctr.getById)
-router.put('/:id', ctr.addView)
+router.put('/add/view/:id', ctr.addView)
 
 module.exports = router

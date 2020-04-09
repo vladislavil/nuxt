@@ -1,24 +1,16 @@
-const posts = [
-  {
-    title: "post",
-    date: new Date(),
-    view: 22,
-    comment: [1, 2],
-    _id: "id1"
-  },
-  {
-    title: "post2",
-    date: new Date(),
-    view: 22,
-    comment: [1, 2],
-    _id: "id2"
-  }
-]
-
 export const actions = {
   async fetchAdmin({commit}) {
     try {
       return await this.$axios.$get('/api/post/admin');
+    } catch(e) {
+      commit("setError", e, {root: true});
+      throw e;
+    }
+  },
+
+  async fetch({commit}) {
+    try {
+      return await this.$axios.$get('/api/post');
     } catch(e) {
       commit("setError", e, {root: true});
       throw e;
@@ -36,7 +28,8 @@ export const actions = {
 
   async updatePost({commit}, {id, text}) {
     try {
-      return await this.$axios.$put(`/api/post/admin/${id}`, text);
+      console.log(text)
+      return await this.$axios.$put(`/api/post/admin/${id}`, {text});
     } catch(e) {
       commit("setError", e, {root: true});
       throw e;
@@ -61,6 +54,31 @@ export const actions = {
   async fetchById({commit}, id) {
     try {
       return await this.$axios.$get(`/api/post/admin/${id}`);
+    } catch(e) {
+      commit("setError", e, {root: true});
+      throw e;
+    }
+  },
+  async fetchId({commit}, id) {
+    try {
+      return await this.$axios.$get(`/api/post/${id}`);
+    } catch(e) {
+      commit("setError", e, {root: true});
+      throw e;
+    }
+  },
+  async addView({commit}, {views, _id}) {
+    try {
+      return await this.$axios.$put(`/api/post/add/view/${_id}`, {views});
+    } catch(e) {
+      commit("setError", e, {root: true});
+      throw e;
+    }
+  },
+
+  async getAnalytics({commit}) {
+    try {
+      return await this.$axios.$get('/api/post/admin/get/analytics');
     } catch(e) {
       commit("setError", e, {root: true});
       throw e;

@@ -2,32 +2,37 @@
 
   <el-card class="comment">
     <div class="comment-header">
-      <span>Person name</span>
+      <span>{{comment.name}}</span>
       <span>
         <i class="el-icon-time"></i>
-        {{ new Date().toLocaleString() }}
+        {{ new Date(comment.date).toLocaleString() }}
       </span>
     </div>
     <div class="comment-text">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      {{comment.text}}
     </div>
   </el-card>
 
 </template>
-  
+
 <script>
   export default {
-    
+    props: {
+      comment: {
+        type: Object,
+        required: true
+      }
+    }
   }
 </script>
 
 <style lang="sass" scoped>
 
-  .comment 
+  .comment
     margin-bottom: 1rem
 
     &:last-child
-     margin-bottom: 0 
+     margin-bottom: 0
 
   .comment-header
     display: flex
@@ -37,6 +42,6 @@
     font-size: 0.8rem
 
   .comment-text
-    
+
 
 </style>

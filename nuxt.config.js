@@ -33,6 +33,10 @@ module.exports = {
     '@/plugins/axios',
     '@/plugins/globals'
   ],
+
+  axios: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000'
+  },
   /*
   ** Nuxt.js dev-modules
   */
@@ -42,8 +46,13 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa'
   ],
+
+  env: {
+    appName: "SSR Blog"
+  },
   /*
   ** Build configuration
   */

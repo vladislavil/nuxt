@@ -5,44 +5,27 @@
         <nuxt-link to="/">
           <i class="el-icon-back"></i>
         </nuxt-link>
-        <h1>Post title</h1>
+        <h1>{{post.title}}</h1>
       </div>
       <div class="post-info">
         <small>
           <i class="el-icon-time"></i>
-          {{ new Date().toLocaleString() }}
+          {{ new Date(post.date).toLocaleString() }}
         </small>
         <small>
           <i class="el-icon-view"></i>
-          67
+          {{post.views}}
         </small>
       </div>
     </header>
     <div class="post-img">
       <img
-        src="https://holidaygid.ru/wp-content/uploads/2016/03/berlin3.jpg"
-        alt="https://holidaygid.ru/wp-content/uploads/2016/03/berlin3.jpg"
+        :src="post.imageUrl"
+        :alt="post.imageUrl"
       />
     </div>
     <main class="post-content">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam
-        deleniti ipsum impedit fugit blanditiis quod? Nisi optio nostrum
-        inventore dignissimos cumque quis neque! Labore, illo! Est sint ipsa
-        officiis amet.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam
-        deleniti ipsum impedit fugit blanditiis quod? Nisi optio nostrum
-        inventore dignissimos cumque quis neque! Labore, illo! Est sint ipsa
-        officiis amet.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam
-        deleniti ipsum impedit fugit blanditiis quod? Nisi optio nostrum
-        inventore dignissimos cumque quis neque! Labore, illo! Est sint ipsa
-        officiis amet.
-      </p>
+       <vue-markdown>{{post.text}}</vue-markdown>
     </main>
     <footer>
       <transition-group name="fade" tag="div">
@@ -50,18 +33,19 @@
           v-if="isComment"
           @created="creatComment"
           key="1"
+          :postId="post._id"
         >
         </app-form>
-        <div key="2" class="comments" v-if="false" >
+        <div key="2" class="comments" v-if="post.comments.length" >
           <app-comment
-            v-for="comment in 4"
-            :key="comment"
+            v-for="comment in post.comments"
+            :key="comment._id"
             :comment="comment"
           >
           </app-comment>
         </div>
         <div key="3" class="text-center" v-else>Комментариев нет</div>
-      </transition-group>  
+      </transition-group>
     </footer>
   </article>
 </template>
@@ -78,6 +62,18 @@
       AppComment,
       AppForm
     },
+    async asyncData({store, params}) {
+      const post = await store.dispatch('post/fetchById', params.id);
+      await store.dispatch('post/addView', post)
+      return {
+        post: {...post, views: ++post.views}
+      }
+    },
+    head() {
+      return {
+        title: `${this.post.title} | ${process.env.appName}`
+      }
+    },
     data() {
       return {
         isComment: true
@@ -87,7 +83,8 @@
       return !!params.id;
     },
     methods: {
-      creatComment() {
+      creatComment(comment) {
+        this.post.comments.unshift(comment);
         this.isComment = false;
       }
     }
@@ -96,7 +93,7 @@
 
 <style lang="sass" scoped>
 
-  .comments, .form, .text-center 
+  .comments, .form, .text-center
     transition: all 1s;
 
   .fade-leave
@@ -112,7 +109,7 @@
     max-width: 600px
     margin: 0 auto
 
-  .post-title 
+  .post-title
     display: flex
     justify-content: space-between
     align-items: center
@@ -124,12 +121,12 @@
   .post-img
     margin-bottom: 2rem
 
-  .post-info 
+  .post-info
     display: flex
     justify-content: space-between
     align-items: center
 
-  .post-content 
+  .post-content
     margin-bottom: 2rem
 
 

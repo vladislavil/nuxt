@@ -49,12 +49,17 @@
 
   export default {
     layout: "empty",
+    head() {
+      return {
+        title: `Вход в панель администратора | ${process.env.appName}`
+      }
+    },
     data() {
       return {
         loading: false,
         controls: {
-          login: 'fsdfsdf',
-          password: 'fsdfsdfsd'
+          login: 'admin',
+          password: '123456'
         },
         rules: {
           login: [

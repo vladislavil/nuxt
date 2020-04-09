@@ -75,7 +75,6 @@ function isJWTValid(token) {
   }
 
   const jwtData = JwtDecode(token) || {}
-  console.log(jwtData);
 
   const expires = jwtData.exp || 0;
 

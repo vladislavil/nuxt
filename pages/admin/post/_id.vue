@@ -46,7 +46,7 @@
     },
     head() {
       return {
-        title: `Пост | ${this.post.title}`
+        title: `${this.post.title} | ${process.env.appName}`
       }
     },
     async asyncData({store, params}) {

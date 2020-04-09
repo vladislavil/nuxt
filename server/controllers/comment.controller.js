@@ -10,12 +10,11 @@ module.exports.createComment = async (req, res) => {
 
     const post = await Post.findById(postId)
     post.comments.push(comment._id)
-
     await post.save()
 
     res.status(201).json(comment)
 
-  }catch(e) {
+  } catch (e) {
     res.status(500).json(e)
   }
 }

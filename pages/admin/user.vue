@@ -46,12 +46,17 @@
   export default {
     layout: "admin",
     middleware: 'admin-auth',
+    head() {
+      return {
+        title: `Новый пользователь | ${process.env.appName}`
+      }
+    },
     data() {
       return {
         loading: false,
         controls: {
-          login: 'fsdfsdf',
-          password: 'fsdfsdfsd'
+          login: '',
+          password: ''
         },
         rules: {
           login: [

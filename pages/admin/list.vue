@@ -65,6 +65,11 @@
       const posts = await store.dispatch('post/fetchAdmin');
       return {posts};
     },
+    head() {
+      return {
+        title: `Все посты | ${process.env.appName}`
+      }
+    },
     methods: {
       open(id) {
         this.$router.push(`/admin/post/${id}`)

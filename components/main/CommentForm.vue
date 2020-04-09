@@ -4,7 +4,7 @@
     :rules="rules"
     ref="form"
     class="form"
-    @submit.native.prevent="onSubmit($event)"
+    @submit.native.prevent="onSubmit()"
   >
     <h2 class="from-title">Добавить комментарий</h2>
     <el-form-item
@@ -41,12 +41,18 @@
 
 <script>
   export default {
+    props: {
+      postId: {
+        type: String,
+        required: true
+      }
+    },
     data() {
       return {
         loading: false,
         controls: {
-          name: 'fsdfsdf',
-          text: 'fsdfsdfsd'
+          name: '',
+          text: ''
         },
         rules: {
           name: [
@@ -59,23 +65,24 @@
       }
     },
     methods: {
-      onSubmit(e) {
-        this.$refs.form.validate((valid) => {
+      onSubmit() {
+        this.$refs.form.validate( async (valid) => {
           if (valid) {
 
             this.loading = true;
-            console.log(e)
+
             const formData = {
               name: this.controls.name,
               text: this.controls.text,
-              postId: ''
+              postId: this.postId
             }
 
             try {
-              setTimeout(()=> {
-                this.$message.success('Комментарий успешно добавлен');
-                this.$emit('created');
-              }, 2000);
+              const newComment = await this.$store.dispatch('comment/create', formData)
+              this.$message.success('Комментарий успешно добавлен');
+              this.$emit('created', newComment);
+
+              console.log(newComment);
 
             } catch(e) {
               this.loading = false;
